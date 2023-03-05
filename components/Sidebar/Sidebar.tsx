@@ -61,7 +61,7 @@ export default function Sidebar() {
             })}>My Events</Box>
           </Stack>
           <Box
-            mih={360}
+            mih={370}
             sx={{
               flex: "1 1 0",
               textAlign: 'center',

@@ -6,6 +6,7 @@ export default function DateDisplay() {
   return (
     <>
       <Flex
+        miw={56}
         align="center"
         justify="center"
         direction="column"
