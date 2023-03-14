@@ -1,7 +1,7 @@
 'use client';
 import { Text, Space, Box, Stack, Chip, ScrollArea, Flex, Title, Avatar, useMantineTheme } from '@mantine/core';
 
-export default function DateDisplay() {
+export default function DateDisplay({month, day}: {month: string, day: number}) {
   const theme = useMantineTheme();
   return (
     <>
@@ -18,14 +18,14 @@ export default function DateDisplay() {
           w={56}
           align="center"
           justify="center"
-        ><Title order={6}>jan</Title></Flex>
+        ><Title order={6}>{month}</Title></Flex>
         <Flex
           bg={theme.colors.dark[4]}
           h={36}
           w={56}
           align="center"
           justify="center"
-        ><Title order={3}>17</Title></Flex>
+        ><Title order={3}>{day}</Title></Flex>
 
       </Flex>
 

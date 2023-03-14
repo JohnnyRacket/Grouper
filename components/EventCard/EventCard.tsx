@@ -1,9 +1,22 @@
 'use client';
+import { Event } from '@/types/Event';
 import { Text, Space, Box, Stack, Chip, ScrollArea, Flex, Title, Avatar, Card, Image, Group, Badge, Button, useMantineTheme, Tooltip, MediaQuery } from '@mantine/core';
 import DateDisplay from '../DateDisplay/DateDisplay';
 
-export default function EventCard() {
+export default function EventCard({event}: {event: Event}) {
   const theme = useMantineTheme();
+
+  const formatTimeOfDay = (datestring: Date | string) => {
+    const date = new Date(datestring);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    return `${date.getHours() % 12}:${minutes} ${date.getHours() > 12 ? 'PM' : 'AM'}`
+  }
+
+  const getMonth = (datestring: Date | string) => {
+    const date = new Date(datestring);
+    const month = date.toLocaleString('default', { month: 'short' });
+    return month;
+  }
 
   return (
     <>
@@ -19,15 +32,15 @@ export default function EventCard() {
         {/* Below is the section for a desktop view */}
         <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
           <Group mt="md" w="100%" noWrap>
-            <DateDisplay />
+            <DateDisplay month={getMonth(event.start)} day={new Date(event.start).getDate()}/>
             <Group position="apart" noWrap sx={{ flex: "1 1 auto" }}>
               <Flex
                 direction="column"
 
                 sx={{ flex: "1 1 auto", minWidth: 0 }}>
-                <Text weight={500} size="lg" lineClamp={2} sx={{ display: "-webkit-box", WebkitBoxOrient: "vertical", overflow: "hidden", minWidth: 0 }}>Norway Fjord Adventures Test two long</Text>
+                <Text weight={500} size="lg" lineClamp={2} sx={{ display: "-webkit-box", WebkitBoxOrient: "vertical", overflow: "hidden", minWidth: 0 }}>{event.title}</Text>
                 <Text size="md" color="dimmed">
-                  7:30 PM, 4546 Eli Street
+                  {`${formatTimeOfDay(event.start)}, ${event.location}`}
                 </Text>
               </Flex>
               <Stack>
@@ -92,14 +105,14 @@ export default function EventCard() {
             <Flex
               direction="column"
               sx={{ flex: "1 1 auto" }}>
-              <Text weight={500} size="lg" lineClamp={2} sx={{ display: "-webkit-box", WebkitBoxOrient: "vertical", overflow: "hidden", minWidth: 0 }}>Norway Fjord Adventures Test two long</Text>
+              <Text weight={500} size="lg" lineClamp={2} sx={{ display: "-webkit-box", WebkitBoxOrient: "vertical", overflow: "hidden", minWidth: 0 }}>{event.title}</Text>
               <Text size="md" color="dimmed">
-                7:30 PM, 4546 Eli Street
+              {`${formatTimeOfDay(event.start)}, ${event.location}`}
               </Text>
             </Flex>
 
             <Group position="apart" sx={{ flex: "1 1 auto" }}>
-              <DateDisplay />
+              <DateDisplay month={getMonth(event.start)} day={new Date(event.start).getDate()}/>
               <Stack>
                 <Text weight={500} color="dimmed">Who's Going:</Text>
                 <Tooltip.Group openDelay={300} closeDelay={100}>
