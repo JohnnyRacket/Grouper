@@ -5,6 +5,7 @@ import EventCard from '@/components/EventCard/EventCard';
 import { Event } from '@/types/Event';
 import { useQuery, useQueryClient } from 'react-query';
 import EventCardListView from '@/components/EventsListView/EventsListView';
+import EventCardSkeleton from '@/components/EventCard/EventCardSkeleton';
 
 
 // async function getEvents() {
@@ -19,8 +20,6 @@ export default function Home() {
   const { isLoading, error, data }  = useQuery('events', () =>
   fetch(`http://localhost:3000/api/events`).then(res => res.json()));
 
-  console.log(data);
-
   return (
     <>
       <Head>
@@ -30,7 +29,6 @@ export default function Home() {
 
       <Container size="md">
         {!isLoading && <EventCardListView events={data} />}
-        
       </Container>
     </>
   )

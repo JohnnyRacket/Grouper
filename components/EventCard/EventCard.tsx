@@ -20,7 +20,7 @@ export default function EventCard({event}: {event: Event}) {
 
   return (
     <>
-      <Card shadow="sm" padding="md" radius="md" withBorder my="xl">
+      <Card shadow="sm" padding="md" radius="md" withBorder my="md">
         <Card.Section>
           <Image
             src="/summer-time-rendering.webp"
