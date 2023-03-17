@@ -1,25 +1,31 @@
 'use client';
 import Head from 'next/head';
 import { Container, Divider, MantineProvider, TextInput } from '@mantine/core';
-import EventCard from '@/components/EventCard/EventCard';
 import { Event } from '@/types/Event';
 import { useQuery, useQueryClient } from 'react-query';
 import EventCardListView from '@/components/EventsListView/EventsListView';
-import EventCardSkeleton from '@/components/EventCard/EventCardSkeleton';
-
-
-// async function getEvents() {
-//   const res = await fetch('http://localhost:3000/api/events');
-//   const data = await res.json();
-//   return data as Event[];
-// }
+import { useContext, useEffect } from 'react';
+import { EventsContext } from '@/contexts/events/EventsContext';
+import { EventsReducers, EventsState } from '@/contexts/events/EventsState';
 
 export default function Home() {
   const queryClient = useQueryClient()
+  const {events, setEvents} = useContext(EventsContext);
 
-  const { isLoading, error, data }  = useQuery('events', () =>
+  const { isLoading, error, data }  = useQuery<Event[]>('events', () =>
   fetch(`http://localhost:3000/api/events`).then(res => res.json()));
 
+  useEffect(()=>{
+    if(!isLoading) {
+      console.log('done loading');
+      if (data){
+        console.log('hi');
+        setEvents(data);
+      }
+    }
+  },[isLoading, data])
+
+  console.log('events', events)
   return (
     <>
       <Head>
@@ -28,7 +34,7 @@ export default function Home() {
       </Head>
 
       <Container size="md">
-        {!isLoading && <EventCardListView events={data} />}
+        {!isLoading && <EventCardListView events={events} />}
       </Container>
     </>
   )

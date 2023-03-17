@@ -6,6 +6,7 @@ export type EventsActions =
  | { type: 'SET_EVENTS', events: Event[] }
  
 const EventsReducer =  (state: EventsState, action: EventsActions) => {
+    console.log('in the reducer')
    switch(action.type) {
        case 'SET_EVENTS':
            return {

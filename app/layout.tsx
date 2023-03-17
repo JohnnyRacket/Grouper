@@ -18,18 +18,19 @@ import {
 import Sidebar from '@/components/Sidebar/Sidebar';
 import HeaderContents from '@/components/HeaderContents/HeaderContents';
 import Head from 'next/head';
+import { EventsProvider } from '@/contexts/events/EventsContext';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const queryClient = new QueryClient(
     {
-    defaultOptions: {
-      queries: {
-        suspense: true,
+      defaultOptions: {
+        queries: {
+          suspense: true,
+        },
       },
-    },
-  }
+    }
   );
 
   return (
@@ -64,52 +65,54 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           >
             <QueryClientProvider client={queryClient}>
-              <AppShell
-                layout='alt'
-                styles={(theme) => ({
-                  main: {
-                    background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-                  },
-                })}
-                navbarOffsetBreakpoint="sm"
-                navbar={
-                  <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 240 }} sx={{ overflowY: "auto" }} h="100%">
-                    <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                      {opened ?
-                        <Burger
-                          opened={opened}
-                          onClick={() => setOpened((o) => !o)}
-                          size="sm"
-                          color={theme.colors.gray[6]}
-                          m="sm"
-                          mr="xl"
-                        />
-                        : <></>
-                      }
-                    </MediaQuery>
-                    <Sidebar />
-                  </Navbar>
-                }
-                header={
-                  <Header height={{ base: 50, md: 70 }} p="md">
-                    <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+              <EventsProvider>
+                <AppShell
+                  layout='alt'
+                  styles={(theme) => ({
+                    main: {
+                      background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+                    },
+                  })}
+                  navbarOffsetBreakpoint="sm"
+                  navbar={
+                    <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 240 }} sx={{ overflowY: "auto" }} h="100%">
                       <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                        <Burger
-                          opened={opened}
-                          onClick={() => setOpened((o) => !o)}
-                          size="sm"
-                          color={theme.colors.gray[6]}
-                          mr="xl"
-                        />
+                        {opened ?
+                          <Burger
+                            opened={opened}
+                            onClick={() => setOpened((o) => !o)}
+                            size="sm"
+                            color={theme.colors.gray[6]}
+                            m="sm"
+                            mr="xl"
+                          />
+                          : <></>
+                        }
                       </MediaQuery>
+                      <Sidebar />
+                    </Navbar>
+                  }
+                  header={
+                    <Header height={{ base: 50, md: 70 }} p="md">
+                      <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+                        <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+                          <Burger
+                            opened={opened}
+                            onClick={() => setOpened((o) => !o)}
+                            size="sm"
+                            color={theme.colors.gray[6]}
+                            mr="xl"
+                          />
+                        </MediaQuery>
 
-                      <HeaderContents />
-                    </div>
-                  </Header>
-                }
-              >
-                {children}
-              </AppShell>
+                        <HeaderContents />
+                      </div>
+                    </Header>
+                  }
+                >
+                  {children}
+                </AppShell>
+              </EventsProvider>
             </QueryClientProvider>
           </MantineProvider>
         </RootStyleRegistry>

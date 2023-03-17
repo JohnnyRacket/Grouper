@@ -6,14 +6,15 @@ import { EventsReducers, EventsState, initialState } from './EventsState';
 
 
 
-export const EventsContext = createContext<EventsState | EventsReducers>(initialState);
+export const EventsContext = createContext<EventsState & EventsReducers>(initialState);
 
 export const EventsProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(EventsReducer, initialState);
 
     // Actions for changing state
 
-    function setEvents(events: Event[]) {
+    const setEvents = (events: Event[]) => {
+        console.log('meow moew');
         dispatch({
             type: 'SET_EVENTS',
             events: events

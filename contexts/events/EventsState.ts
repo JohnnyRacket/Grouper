@@ -1,13 +1,14 @@
 import { Event } from '@/types/Event';
 
-export type EventsState = {
+export interface EventsState {
     events: Event[],
 }
 
-export type EventsReducers = {
-    setEvents: Function,
+export interface EventsReducers {
+    setEvents: (events: Event[]) => void,
 }
 
-export const initialState: EventsState = {
-    events: []
+export const initialState: EventsState & EventsReducers = {
+    events: [],
+    setEvents: (events: Event[]) => {console.log('Set Events Reducer not set.')},
 }
