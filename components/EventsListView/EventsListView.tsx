@@ -1,6 +1,6 @@
 'use client';
 import { Event } from '@/types/Event';
-import { Flex, Button, Avatar, Card, Group, Badge, Text, Image, Space, Indicator, Box, Stack, Divider } from '@mantine/core';
+import { Stack, Divider } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import EventCard from '../EventCard/EventCard';
 import EventCardSkeleton from '../EventCard/EventCardSkeleton';
