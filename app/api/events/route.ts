@@ -1,4 +1,4 @@
-import { mockEvent } from "@/mock/Events";
+import { mockEvent } from "@/mock/Event";
 
 export async function GET(request: Request) {
     // go fetch events
