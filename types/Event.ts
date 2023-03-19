@@ -19,9 +19,9 @@ export interface Event {
     
     group: Group;
 
-    attending: PublicUser[];
-    maybeAttending: PublicUser[];
-    notAttending: PublicUser[];
+    rsvpYes: PublicUser[];
+    rsvpMaybe: PublicUser[];
+    rsvpNo: PublicUser[];
 
-    
+
   }
