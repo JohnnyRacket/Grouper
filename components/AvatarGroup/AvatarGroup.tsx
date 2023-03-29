@@ -6,7 +6,7 @@ export default function AvatarGroup({ users }: { users: PublicUser[] }) {
   return (
     <>
       <Tooltip.Group openDelay={300} closeDelay={100}>
-        <Avatar.Group spacing="md">
+        <Avatar.Group spacing="md" sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           {users.slice(0, 3).map((user, index) => {
             return (
               <Tooltip label={user.name} withArrow key={index}>
@@ -21,13 +21,14 @@ export default function AvatarGroup({ users }: { users: PublicUser[] }) {
             )
           })
           }
-          {Math.max(users?.length - 3, 0) > 0 &&
+          {users?.slice(3, 8).length > 0 &&
             <Tooltip
               label={
                 <>
-                  {users?.slice(3).map((user, index) => (
+                  {users?.slice(3, 8).map((user, index) => (
                     <Text key={index}>{user.name}</Text>
                   ))}
+                  {users?.slice(8).length > 0 && <Text>+{users?.slice(8).length} more</Text>}
                 </>
               }
               withArrow
