@@ -1,6 +1,7 @@
 import { Event } from '@/types/Event';
 
 export interface EventsState {
+    upNext?: Event,
     events: Event[],
     groupFilters: string[],
     rsvpFilters: string[],
@@ -20,6 +21,7 @@ export interface EventsReducers {
 }
 
 export const initialState: EventsState & EventsReducers = {
+    upNext: undefined,
     events: [],
     groupFilters: [],
     rsvpFilters: [],

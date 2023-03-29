@@ -28,9 +28,14 @@ const EventsReducer = (state: EventsState, action: EventsActions): EventsState =
   console.log('in the reducer')
   switch (action.type) {
     case EventActionTypes.SET_EVENTS:
+      action.events.sort(function (a, b) {
+        return new Date(a.start) as any - (new Date(b.start) as any);
+      });
+
       return {
         ...state,
         events: action.events,
+        upNext: action.events?.[0],
       }
     case EventActionTypes.ADD_GROUP_FILTER:
       return {

@@ -68,6 +68,7 @@ export const EventsProvider = ({ children }: { children: ReactNode }) => {
   return (
     <EventsContext.Provider value={
       {
+        upNext: state.upNext,
         events: state.events,
         groupFilters: state.groupFilters,
         rsvpFilters: state.rsvpFilters,

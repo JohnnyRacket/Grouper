@@ -10,20 +10,20 @@ import { EventsReducers, EventsState } from '@/contexts/events/EventsState';
 
 export default function Home() {
   const queryClient = useQueryClient()
-  const {events, setEvents} = useContext(EventsContext);
+  const { events, setEvents } = useContext(EventsContext);
 
-  const { isLoading, error, data }  = useQuery<Event[]>('events', () =>
-  fetch(`http://localhost:3000/api/events`).then(res => res.json()));
+  const { isLoading, error, data } = useQuery<Event[]>('events', () =>
+    fetch(`http://localhost:3000/api/events`).then(res => res.json()));
 
-  useEffect(()=>{
-    if(!isLoading) {
+  useEffect(() => {
+    if (!isLoading) {
       console.log('done loading');
-      if (data){
-        console.log('hi');
+      if (data) {
         setEvents(data);
       }
     }
-  },[isLoading, data])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, data])
 
   console.log('events', events)
   return (

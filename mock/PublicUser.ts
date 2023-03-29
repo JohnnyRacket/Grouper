@@ -1,10 +1,11 @@
 import { PublicUser } from "@/types/PublicUser";
-import { idGenerator } from "./utils";
+import { generateRandomColor, idGenerator } from "./utils";
 
 export const mockPublicUser: PublicUser = {
     id: 'jdf98d7yhfdsfdf',
     name: 'Mockson Mockerton',
     initials: 'MM',
+    color: 'indigo',
 }
 
 const names =[
@@ -30,10 +31,12 @@ export const generateRandomPublicUser = (): PublicUser => {
     let initials = 'XX';
     if (matches) initials = matches.join('');
     const id = idGenerator.next().value;
+    const color = generateRandomColor();
 
     return {
         id: id,
         name: name,
         initials: initials,
+        color: color,
     }
 }

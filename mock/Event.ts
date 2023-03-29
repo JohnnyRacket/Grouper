@@ -1,5 +1,6 @@
 import { Event } from "@/types/Event";
 import { generateRandomMockGroup } from "./Group";
+import { mockImage } from "./image";
 import { generateRandomPublicUser } from "./PublicUser";
 import { generatreRandomDateBetween, idGenerator } from "./utils";
 
@@ -14,6 +15,7 @@ export const mockEvent: Event = {
     },
     dateCreated: new Date(),
     body: '',
+    image: mockImage,
     location: '4546 Eli St, Houston TX',
     start: new Date('2023-3-23T03:24:00'),
     group: {
